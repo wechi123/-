@@ -1,4 +1,4 @@
-#include "Item.h"
+ï»¿#include "Item.h"
 #include <sstream>
 
 Item::Item(int id, const std::string& name, const std::string& desc,
@@ -11,10 +11,10 @@ std::string Item::getInfo() const {
     std::ostringstream oss;
     oss << "[" << getTypeName() << "] " << m_name
         << " (ID:" << m_id << ")"
-        << "\n  ÃèÊö£º" << m_description
-        << "\n  ¼Û¸ñ£º" << m_price << " ½ð±Ò"
-        << "\n  ÊýÁ¿£º" << m_quantity
-        << "\n  Ð§¹û£º" << getEffectDesc();
+        << "\n  æè¿°ï¼š" << m_description
+        << "\n  ä»·æ ¼ï¼š" << m_price << " é‡‘å¸"
+        << "\n  æ•°é‡ï¼š" << m_quantity
+        << "\n  æ•ˆæžœï¼š" << getEffectDesc();
     return oss.str();
 }
-std::string Item::getEffectDesc() const { return "ÎÞÌØÊâÐ§¹û"; }
+std::string Item::getEffectDesc() const { return "æ— ç‰¹æ®Šæ•ˆæžœ"; }

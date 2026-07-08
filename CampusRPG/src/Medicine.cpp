@@ -1,26 +1,27 @@
-#include "Medicine.h"
+ï»¿#include "Medicine.h"
 #include <iostream>
 #include <sstream>
 
 Medicine::Medicine(int id, const std::string& name, const std::string& desc,
                    int price, int hpRestore, const std::string& cureEffect, int quantity)
     : Item(id, name, desc, ItemType::MEDICINE, price, quantity),
-      m_hpRestore(hpRestore), m_cureEffect(cureEffect), m_hasCure(!cureEffect.empty()) {}
+      m_hpRestore(hpRestore), m_cureEffect(cureEffect),
+      m_hasCure(!cureEffect.empty()) {}
 
 void Medicine::use(Character& target) {
-    std::cout << "\n>>> Ê¹ÓÃÒ©Æ·¡¾" << m_name << "¡¿\n";
+    std::cout << "\n>>> ä½¿ç”¨è¯å“ã€" << m_name << "ã€‘\n";
     int before = target.getHP();
     target.addHP(m_hpRestore);
-    std::cout << "»Ö¸´ÁË " << (target.getHP() - before) << " µãÉúÃüÖµ£¡\n";
-    if (m_hasCure) std::cout << "ÖÎÓúÁË¡¾" << m_cureEffect << "¡¿×´Ì¬£¡\n";
-    std::cout << "µ±Ç°HP£º" << target.getHP() << " / " << target.getMaxHP() << "\n";
+    std::cout << "æ¢å¤äº† " << (target.getHP() - before) << " ç‚¹ç”Ÿå‘½å€¼ï¼\n";
+    if (m_hasCure) std::cout << "æ²»æ„ˆäº†ã€" << m_cureEffect << "ã€‘çŠ¶æ€ï¼\n";
+    std::cout << "å½“å‰HPï¼š" << target.getHP() << " / " << target.getMaxHP() << "\n";
     m_quantity--;
 }
 Item* Medicine::clone() const { return new Medicine(*this); }
 std::string Medicine::getInfo() const { return Item::getInfo(); }
 std::string Medicine::getEffectDesc() const {
     std::ostringstream oss;
-    oss << "»Ö¸´ " << m_hpRestore << " µãÉúÃüÖµ";
-    if (m_hasCure) oss << "£¬ÖÎÓú¡¾" << m_cureEffect << "¡¿";
+    oss << "æ¢å¤ " << m_hpRestore << " ç‚¹ç”Ÿå‘½å€¼";
+    if (m_hasCure) oss << "ï¼Œæ²»æ„ˆã€" << m_cureEffect << "ã€‘";
     return oss.str();
 }

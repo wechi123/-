@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.14)
+﻿cmake_minimum_required(VERSION 3.14)
 project(CampusRPG LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(SOURCES
-    src/Character.cpp src/Item.cpp src/Food.cpp src/Medicine.cpp
-    src/Equipment.cpp src/Inventory.cpp src/Shop.cpp src/Database.cpp
-    main.cpp
+    src/Item.cpp src/Food.cpp src/Medicine.cpp
+    src/Equipment.cpp src/Inventory.cpp src/Shop.cpp
+    src/Database.cpp main.cpp
 )
 set(SQLITE_SOURCES lib/sqlite3.c)
 

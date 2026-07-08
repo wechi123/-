@@ -1,32 +1,22 @@
-#ifndef MEDICINE_H
+﻿#ifndef MEDICINE_H
 #define MEDICINE_H
-
 #include "Item.h"
-
-// ============================================================
-// Medicine ??? - ??? Item
-// ???????? + ??????????
-// ============================================================
+// Medicine 药品 - 继承自 Item，效果：恢复HP + 治愈状态
 class Medicine : public Item {
-private:
-    int         m_hpRestore;
+    int m_hpRestore;
     std::string m_cureEffect;
-    bool        m_hasCure;
-
+    bool m_hasCure;
 public:
     Medicine(int id, const std::string& name, const std::string& desc,
              int price, int hpRestore,
              const std::string& cureEffect = "", int quantity = 1);
-
     void use(Character& target) override;
     Item* clone() const override;
-    std::string getTypeName() const override { return "??"; }
+    std::string getTypeName() const override { return "药品"; }
     std::string getInfo() const override;
     std::string getEffectDesc() const override;
-
-    int getHpRestore() const         { return m_hpRestore; }
-    std::string getCureEffect() const{ return m_cureEffect; }
-    bool hasCure() const             { return m_hasCure; }
+    int getHpRestore() const { return m_hpRestore; }
+    std::string getCureEffect() const { return m_cureEffect; }
+    bool hasCure() const { return m_hasCure; }
 };
-
 #endif
