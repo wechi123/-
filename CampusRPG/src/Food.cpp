@@ -1,25 +1,24 @@
-Ôªø#include "Food.h"
+#include "Food.h"
 #include <iostream>
 #include <sstream>
 
 Food::Food(int id, const std::string& name, const std::string& desc,
            int price, int hpRestore, int quantity)
-    : Item(id, name, desc, ItemType::FOOD, price, quantity),
-      m_hpRestore(hpRestore) {}
+    : Item(id, name, desc, ItemType::FOOD, price, quantity), m_hpRestore(hpRestore) {}
 
 void Food::use(Character& target) {
     int before = target.getHP();
     target.addHP(m_hpRestore);
     int healed = target.getHP() - before;
-    std::cout << "\n>>> ‰ΩøÁî®È£üÁâ©„Äê" << m_name << "„Äë\n";
-    std::cout << "ÊÅ¢Â§ç‰∫Ü " << healed << " ÁÇπÁîüÂëΩÂÄºÔºÅ\n";
-    std::cout << "ÂΩìÂâçHPÔºö" << target.getHP() << " / " << target.getMaxHP() << "\n";
+    std::cout << "\n>>>  π”√ ≥ŒÔ°æ" << m_name << "°ø\n";
+    std::cout << "ª÷∏¥¡À " << healed << " µ„…˙√¸÷µ£°\n";
+    std::cout << "µ±«∞HP£∫" << target.getHP() << " / " << target.getMaxHP() << "\n";
     m_quantity--;
 }
 Item* Food::clone() const { return new Food(*this); }
 std::string Food::getInfo() const { return Item::getInfo(); }
 std::string Food::getEffectDesc() const {
     std::ostringstream oss;
-    oss << "ÊÅ¢Â§ç " << m_hpRestore << " ÁÇπÁîüÂëΩÂÄº";
+    oss << "ª÷∏¥ " << m_hpRestore << " µ„…˙√¸÷µ";
     return oss.str();
 }

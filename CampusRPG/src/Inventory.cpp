@@ -1,4 +1,4 @@
-ï»¿#include "Inventory.h"
+#include "Inventory.h"
 #include <iostream>
 #include <algorithm>
 
@@ -7,12 +7,12 @@ Inventory::~Inventory() { for (Item* item : m_items) delete item; m_items.clear(
 
 bool Inventory::addItem(Item* item) {
     if (isFull()) {
-        std::cout << "ã€æç¤ºã€‘èƒŒåŒ…èƒŒåŒ…å·²æ»¡ï¼ˆ" << m_maxCapacity
-                  << "ï¼‰ï¼Œç„¡æ³•ç²å¾—ã€" << item->getName() << "ã€‘ï¼\n";
+        std::cout << "¡¾ÌáÊ¾¡¿±³°üÒÑÂú£¨" << m_maxCapacity << "£©£¬ÎÞ·¨»ñµÃ¡¾"
+                  << item->getName() << "¡¿£¡\n";
         return false;
     }
     m_items.push_back(item);
-    std::cout << "ã€èŽ·å¾—ç‰©å“ã€‘" << item->getName() << " x" << item->getQuantity() << "\n";
+    std::cout << "¡¾»ñµÃÎïÆ·¡¿" << item->getName() << " x" << item->getQuantity() << "\n";
     return true;
 }
 
@@ -20,9 +20,9 @@ bool Inventory::addItemOrStack(Item* item) {
     int index = findItemIndex(item->getID());
     if (index != -1) {
         m_items[index]->addQuantity(item->getQuantity());
-        std::cout << "ã€èŽ·å¾—ç‰©å“ã€‘" << item->getName()
+        std::cout << "¡¾»ñµÃÎïÆ·¡¿" << item->getName()
                   << " x" << item->getQuantity()
-                  << "ï¼ˆå †å åŽï¼š" << m_items[index]->getQuantity() << "ï¼‰\n";
+                  << "£¨¶Ñµþºó£º" << m_items[index]->getQuantity() << "£©\n";
         delete item; return true;
     }
     return addItem(item);
@@ -30,43 +30,39 @@ bool Inventory::addItemOrStack(Item* item) {
 
 bool Inventory::removeItem(int index) {
     if (index < 0 || index >= getItemCount()) {
-        std::cout << "ã€é”™è¯¯ã€‘æ— æ•ˆçš„ç‰©å“ç´¢å¼•ï¼\n"; return false;
+        std::cout << "¡¾´íÎó¡¿ÎÞÐ§µÄÎïÆ·Ë÷Òý£¡\n"; return false;
     }
     std::string name = m_items[index]->getName();
     delete m_items[index]; m_items.erase(m_items.begin() + index);
-    std::cout << "ã€åˆ é™¤ç‰©å“ã€‘" << name << "\n";
+    std::cout << "¡¾É¾³ýÎïÆ·¡¿" << name << "\n";
     return true;
 }
 
 bool Inventory::removeItemByID(int id, int quantity) {
     int index = findItemIndex(id);
-    if (index == -1) { std::cout << "ã€é”™è¯¯ã€‘èƒŒåŒ…ä¸­æ²¡æœ‰è¯¥ç‰©å“ï¼\n"; return false; }
+    if (index == -1) { std::cout << "¡¾´íÎó¡¿±³°üÖÐÃ»ÓÐ¸ÃÎïÆ·£¡\n"; return false; }
     Item* item = m_items[index];
     if (item->getQuantity() <= quantity) return removeItem(index);
     item->addQuantity(-quantity);
-    std::cout << "ã€ä½¿ç”¨ç‰©å“ã€‘" << item->getName()
-              << "ï¼Œå‰©ä½™ " << item->getQuantity() << " å€‹\n";
+    std::cout << "¡¾Ê¹ÓÃÎïÆ·¡¿" << item->getName() << "£¬Ê£Óà " << item->getQuantity() << " ¸ö\n";
     return true;
 }
 
 bool Inventory::useItem(int index, Character& target) {
     if (index < 0 || index >= getItemCount()) {
-        std::cout << "ã€é”™è¯¯ã€‘æ— æ•ˆçš„ç‰©å“ç´¢å¼•ï¼\n"; return false;
+        std::cout << "¡¾´íÎó¡¿ÎÞÐ§µÄÎïÆ·Ë÷Òý£¡\n"; return false;
     }
     Item* item = m_items[index];
-    item->use(target);  // å¤šæ€è°ƒç”¨
-    if (item->getQuantity() <= 0) {
-        delete m_items[index]; m_items.erase(m_items.begin() + index);
-    }
+    item->use(target);  // ¶àÌ¬µ÷ÓÃ
+    if (item->getQuantity() <= 0) { delete m_items[index]; m_items.erase(m_items.begin() + index); }
     return true;
 }
 
 void Inventory::showInventory() const {
-    std::cout << "\n========== èƒŒåŒ…ï¼ˆ" << getItemCount()
-              << " / " << m_maxCapacity << "ï¼‰==========\n";
-    std::cout << "é‡‘å¸ï¼š" << m_ownerGold << "\n";
+    std::cout << "\n========== ±³°ü£¨" << getItemCount() << " / " << m_maxCapacity << "£©==========\n";
+    std::cout << "½ð±Ò£º" << m_ownerGold << "\n";
     if (isEmpty()) {
-        std::cout << "ï¼ˆç©ºï¼‰\n";
+        std::cout << "£¨¿Õ£©\n";
     } else {
         for (size_t i = 0; i < m_items.size(); ++i) {
             std::cout << "[" << i << "] " << m_items[i]->getInfo() << "\n";
