@@ -1,20 +1,31 @@
-﻿cmake_minimum_required(VERSION 3.14)
-project(RPGAdventureGUI VERSION 1.0 LANGUAGES CXX)
+# ============================================================
+# 校园RPG冒险游戏 — 顶层 CMakeLists.txt
+# 项目包含三个独立可执行目标 + 共享模块：
+#   1. gui_app    — Win32 GUI 角色管理系统
+#   2. console_app — 控制台物品/商店/数据库系统
+#   3. battle_app  — 控制台战斗系统
+#   4. shared      — 跨模块集成代码（预留）
+# ============================================================
 
+cmake_minimum_required(VERSION 3.14)
+project(CampusRPG VERSION 1.0 LANGUAGES C CXX)
+
+# ---- C++ 标准 ----
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 编译方式（使用 MinGW）:
-# 1. windres resources.rc -o resources.o -O coff
-# 2. g++ -std=c++17 -fno-exceptions -I include main_gui.cpp src/*.cpp resources.o -o RPGAdventureGUI.exe -static -mwindows -lcomctl32
+# ---- 编译选项 ----
+if(MSVC)
+    add_compile_options(/W3 /utf-8)
+else()
+    add_compile_options(-Wall -Wextra)
+endif()
 
-set(SOURCES
-    main_gui.cpp
-    src/Character.cpp
-    src/LevelSystem.cpp
-    src/SaveManager.cpp
-)
+# ---- 输出目录统一 ----
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "/bin")
 
-include_directories(include)
-add_executable(RPGAdventureGUI WIN32 ${SOURCES})
-target_link_libraries(RPGAdventureGUI comctl32)
+# ---- 子目录 ----
+add_subdirectory(gui_app)
+add_subdirectory(console_app)
+add_subdirectory(battle_app)
+add_subdirectory(shared)
