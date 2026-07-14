@@ -1,4 +1,4 @@
-#include "BattleSystem.h"
+﻿#include "BattleSystem.h"
 #include "GameConfig.h"
 #include <cstdlib>
 #include <ctime>

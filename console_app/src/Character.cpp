@@ -1,4 +1,4 @@
-#include "Character.h"
+ï»¿#include "Character.h"
 #include <iostream>
 #include <algorithm>
 
@@ -35,13 +35,13 @@ void Character::addAttack(int delta) { attack += delta; }
 void Character::addDefense(int delta) { defense += delta; }
 
 void Character::showStatus() const {
-    std::cout << "\n========== ½ÇÉ«×´Ì¬ ==========\n";
-    std::cout << "Ãû³Æ£º" << name << "\n";
-    std::cout << "µÈ¼¶£º" << level << "\n";
-    std::cout << "ÉúÃü£º" << hp << " / " << maxHp << "\n";
-    std::cout << "¾­Ñé£º" << exp << "\n";
-    std::cout << "½ð±Ò£º" << gold << "\n";
-    std::cout << "¹¥»÷£º" << attack << "\n";
-    std::cout << "·ÀÓù£º" << defense << "\n";
+    std::cout << "\n========== è§’è‰²çŠ¶æ€ ==========\n";
+    std::cout << "åç§°ï¼š" << name << "\n";
+    std::cout << "ç­‰çº§ï¼š" << level << "\n";
+    std::cout << "ç”Ÿå‘½ï¼š" << hp << " / " << maxHp << "\n";
+    std::cout << "ç»éªŒï¼š" << exp << "\n";
+    std::cout << "é‡‘å¸ï¼š" << gold << "\n";
+    std::cout << "æ”»å‡»ï¼š" << attack << "\n";
+    std::cout << "é˜²å¾¡ï¼š" << defense << "\n";
     std::cout << "===============================\n";
 }

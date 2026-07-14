@@ -53,6 +53,7 @@ public:
 
     // —— 等级成长 ——
     void addExp(int addNum);        // 累加经验，自动检测升级
+    void gainExp(int amount) { addExp(amount); }  // 便捷接口（任务系统用）
     void levelUp();                 // 等级+1，刷新属性，满血满蓝
     void levelUpIfNeeded();         // 文档接口：检测并执行升级
 

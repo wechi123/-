@@ -1,0 +1,1 @@
+c=open('build/gen_docx.py','r',encoding='utf-8').read();c=c.replace("O'Reilly","O''Reilly");open('build/gen_docx.py','w',encoding='utf-8').write(c);print('ok')

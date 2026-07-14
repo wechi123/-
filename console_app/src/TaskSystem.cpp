@@ -118,8 +118,8 @@ bool TaskSystem::claimReward(int index, Character& player) {
     }
 
     // 发放奖励
-    player.gainExp(t.getExpReward());
-    player.gainGold(t.getGoldReward());
+    player.addExp(t.getExpReward());
+    player.addGold(t.getGoldReward());
 
     t.claimReward();  // 标记为已领奖
 

@@ -1,4 +1,4 @@
-#ifndef GAMECONFIG_H
+﻿#ifndef GAMECONFIG_H
 #define GAMECONFIG_H
 
 #include <string>

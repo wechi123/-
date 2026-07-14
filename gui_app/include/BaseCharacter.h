@@ -39,6 +39,13 @@ public:
     int getAttack() const;      // atk = str + level
     int getDefense() const;     // 同 getDef()
 
+    // —— 物品系统兼容接口 ——
+    int getHP() const     { return hp; }        // 别名
+    int getMaxHP() const  { return maxHp; }     // 别名
+    void addHP(int amount) { healHp(amount); }  // 增加HP
+    void addAttack(int delta) { str += delta; recalcStats(); }  // 增加攻击
+    void addDefense(int delta) { def += delta; } // 增加防御
+
     void setName(const std::string& n);
     void setLevel(int lv);
     void setStr(int v);

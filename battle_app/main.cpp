@@ -1,4 +1,4 @@
-#include "GameManager.h"
+﻿#include "GameManager.h"
 #include "ConsoleUI.h"
 #include <cstdlib>
 #include <ctime>

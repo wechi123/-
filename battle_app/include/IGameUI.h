@@ -1,4 +1,4 @@
-#ifndef IGAMEUI_H
+﻿#ifndef IGAMEUI_H
 #define IGAMEUI_H
 
 #include <string>

@@ -1,4 +1,4 @@
-#ifndef BATTLESYSTEM_H
+﻿#ifndef BATTLESYSTEM_H
 #define BATTLESYSTEM_H
 
 #include "IGameUI.h"

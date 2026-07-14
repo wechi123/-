@@ -1,4 +1,4 @@
-#ifndef CHARACTER_H
+﻿#ifndef CHARACTER_H
 #define CHARACTER_H
 
 #include <string>
@@ -30,6 +30,7 @@ public:
     std::vector<std::string> getInfoLines() const;
 
     void gainExp(int amount, std::vector<LevelUpEvent>& outLevelUps);
+    void gainExp(int amount);  // 便捷重载（忽略升级事件）
     void gainGold(int amount);
     bool costGold(int amount);
     int takeDamage(int damage);
@@ -55,6 +56,14 @@ public:
 
     void setName(const std::string& n) { name = n; }
     void setHp(int value) { hp = value; }
+
+    // ---- 物品系统兼容接口 ----
+    int getHP() const { return hp; }
+    int getMaxHP() const { return maxHp; }
+    void addHP(int amount) { heal(amount); }
+    void addAttack(int delta) { attack += delta; }
+    void addDefense(int delta) { defense += delta; }
+    void setMaxHp(int value) { maxHp = value; }
 };
 
 #endif

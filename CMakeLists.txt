@@ -1,4 +1,4 @@
-# ============================================================
+﻿# ============================================================
 # 校园RPG冒险游戏 — 顶层 CMakeLists.txt
 # 项目包含三个独立可执行目标 + 共享模块：
 #   1. gui_app    — Win32 GUI 角色管理系统
@@ -13,6 +13,13 @@ project(CampusRPG VERSION 1.0 LANGUAGES C CXX)
 # ---- C++ 标准 ----
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# ---- UTF-8 编码支持（解决中文乱码） ----
+if(MSVC)
+    add_compile_options(/utf-8)
+else()
+    add_compile_options(-finput-charset=UTF-8 -fexec-charset=UTF-8)
+endif()
 
 # ---- 编译选项 ----
 if(MSVC)

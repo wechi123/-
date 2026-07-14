@@ -1,4 +1,4 @@
-#ifndef MEDICINE_H
+﻿#ifndef MEDICINE_H
 #define MEDICINE_H
 
 #include "Item.h"

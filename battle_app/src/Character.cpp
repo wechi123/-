@@ -1,4 +1,4 @@
-#include "Character.h"
+﻿#include "Character.h"
 #include "GameConfig.h"
 #include <sstream>
 #include <algorithm>
@@ -123,4 +123,9 @@ void Character::deserialize(const std::string& data) {
         attack  = std::stoi(parts[6]);
         defense = std::stoi(parts[7]);
     }
+}
+
+void Character::gainExp(int amount) {
+    std::vector<LevelUpEvent> ignored;
+    gainExp(amount, ignored);
 }

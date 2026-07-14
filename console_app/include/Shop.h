@@ -1,4 +1,4 @@
-#ifndef SHOP_H
+﻿#ifndef SHOP_H
 #define SHOP_H
 
 #include <vector>

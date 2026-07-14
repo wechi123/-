@@ -1,10 +1,19 @@
+﻿# ============================================================
+# gui_app --- Win32 GUI ????????RPG??????
+# ??Win32 API, comctl32
+# 
+# ??resources.rc ?? GBK ??windres ??????
+#       C++ ???? UTF-8 BOM
 # ============================================================
-# gui_app — Win32 GUI 校园RPG角色管理系统
-# 依赖：Win32 API, comctl32
-# 编译方式（MinGW）:
-#   windres resources.rc -o resources.o -O coff
-#   (CMake 会自动处理 .rc 文件)
-# ============================================================
+cmake_minimum_required(VERSION 3.10)
+project(RPGAdventureGUI LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+if(MINGW)
+    set(CMAKE_CXX_FLAGS " -finput-charset=UTF-8 -fexec-charset=UTF-8")
+endif()
 
 set(GUI_SOURCES
     main.cpp
@@ -13,19 +22,25 @@ set(GUI_SOURCES
     src/Skill.cpp
     src/LevelSystem.cpp
     src/SaveManager.cpp
+    src/Item.cpp
+    src/Food.cpp
+    src/Medicine.cpp
+    src/Equipment.cpp
+    src/Inventory.cpp
+    src/Shop.cpp
+    src/Task.cpp
+    src/TaskSystem.cpp
 )
 
-# Windows 资源文件
+# Windows ??? (GBK ??)
 if(WIN32)
     list(APPEND GUI_SOURCES resources.rc)
 endif()
 
-add_executable(gui_app WIN32 )
-target_include_directories(gui_app PRIVATE include)
+add_executable(RPGAdventureGUI WIN32 )
+target_include_directories(RPGAdventureGUI PRIVATE include)
+target_link_libraries(RPGAdventureGUI PRIVATE comctl32)
 
-target_link_libraries(gui_app PRIVATE comctl32)
-
-# 设置输出名称
-set_target_properties(gui_app PROPERTIES
-    OUTPUT_NAME "RPGAdventureGUI"
+set_target_properties(RPGAdventureGUI PROPERTIES
+    WIN32_EXECUTABLE TRUE
 )

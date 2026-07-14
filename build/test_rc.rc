@@ -1,0 +1,107 @@
+#include <windows.h>
+#include <commctrl.h>
+
+#define IDC_EDIT_INPUT  301
+#define IDC_LIST_ITEMS  401
+#define IDC_LIST_SKILLS 402
+#define IDC_LIST_SHOP   403
+#define IDC_LIST_TASKS  404
+#define IDC_TEXT_INFO   501
+#define IDC_RADIO_WAR   1001
+#define IDC_RADIO_MAGE  1002
+#define IDC_RADIO_ARCH  1003
+
+// ---- 创建角色 (100) ----
+100 DIALOGEX 0, 0, 320, 240
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "创建新角色"
+FONT 16, "微软雅黑"
+BEGIN
+    LTEXT           "角色名称：", -1, 20, 20, 80, 20
+    EDITTEXT        IDC_EDIT_INPUT, 100, 18, 200, 24, ES_AUTOHSCROLL
+    LTEXT           "选择职业：", -1, 20, 60, 200, 20
+    CONTROL         "战士  (力8 体8 敏4 智8)", IDC_RADIO_WAR, "Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 20, 85, 280, 20
+    CONTROL         "法师  (力5 体5 敏6 智12)", IDC_RADIO_MAGE, "Button",
+                    BS_AUTORADIOBUTTON, 20, 110, 280, 20
+    CONTROL         "弓箭手(力10 体6 敏8 智6)", IDC_RADIO_ARCH, "Button",
+                    BS_AUTORADIOBUTTON, 20, 135, 280, 20
+    DEFPUSHBUTTON   "确  定", IDOK, 110, 190, 80, 30
+    PUSHBUTTON      "取  消", IDCANCEL, 210, 190, 80, 30
+END
+
+// ---- 获得经验 (200) ----
+200 DIALOGEX 0, 0, 260, 140
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "获得经验值"
+FONT 16, "微软雅黑"
+BEGIN
+    LTEXT           "请输入经验值：", -1, 20, 30, 120, 20
+    EDITTEXT        IDC_EDIT_INPUT, 140, 28, 100, 24, ES_AUTOHSCROLL | ES_NUMBER
+    DEFPUSHBUTTON   "确  定", IDOK, 70, 90, 80, 30
+    PUSHBUTTON      "取  消", IDCANCEL, 150, 90, 80, 30
+END
+
+// ---- 技能管理 (400) ----
+400 DIALOGEX 0, 0, 400, 320
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "技能管理"
+FONT 16, "微软雅黑"
+BEGIN
+    LTEXT           "可用技能：", -1, 15, 10, 100, 20
+    LISTBOX         IDC_LIST_SKILLS, 15, 32, 370, 180,
+                    LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    LTEXT           "技能点剩余：", -1, 15, 225, 100, 20
+    LTEXT           "", IDC_TEXT_INFO, 115, 225, 100, 20
+    DEFPUSHBUTTON   "学习技能", 10001, 20, 260, 120, 30
+    PUSHBUTTON      "升级技能", 10002, 155, 260, 120, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 290, 260, 90, 30
+END
+
+// ---- 背包管理 (500) ----
+500 DIALOGEX 0, 0, 420, 340
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "背包管理"
+FONT 16, "微软雅黑"
+BEGIN
+    LISTBOX         IDC_LIST_ITEMS, 15, 15, 390, 220,
+                    LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    LTEXT           "选择物品后可执行：", -1, 15, 245, 200, 20
+    DEFPUSHBUTTON   "使用物品", 10001, 30, 280, 100, 30
+    PUSHBUTTON      "删除物品", 10002, 150, 280, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 290, 280, 100, 30
+END
+
+// ---- 商店 (600) ----
+600 DIALOGEX 0, 0, 440, 380
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "校园商店"
+FONT 16, "微软雅黑"
+BEGIN
+    LTEXT           "商店商品：", -1, 15, 10, 100, 20
+    LISTBOX         IDC_LIST_SHOP, 15, 30, 410, 130,
+                    LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    PUSHBUTTON      "购买选中", 10001, 15, 170, 100, 30
+    LTEXT           "金币：", -1, 130, 180, 40, 15
+    LTEXT           "", IDC_TEXT_INFO, 170, 180, 100, 15
+    LTEXT           "我的背包：", -1, 15, 215, 100, 20
+    LISTBOX         IDC_LIST_ITEMS, 15, 235, 410, 90,
+                    LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    PUSHBUTTON      "出售选中", 10002, 15, 330, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 330, 330, 90, 30
+END
+
+// ---- 任务系统 (700) ----
+700 DIALOGEX 0, 0, 460, 340
+STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
+CAPTION "任务系统"
+FONT 16, "微软雅黑"
+BEGIN
+    LISTBOX         IDC_LIST_TASKS, 15, 15, 430, 200,
+                    LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    DEFPUSHBUTTON   "接受任务", 10001, 30, 240, 110, 30
+    PUSHBUTTON      "完成任务", 10002, 160, 240, 110, 30
+    PUSHBUTTON      "领取奖励", 10003, 290, 240, 110, 30
+    LTEXT           "", IDC_TEXT_INFO, 15, 285, 430, 20
+    PUSHBUTTON      "关  闭", IDCANCEL, 180, 305, 90, 30
+END
