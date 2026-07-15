@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-text = u"""#include <windows.h>
+import sys
+content = """#include <windows.h>
 #include <commctrl.h>
 
 #define IDC_EDIT_INPUT  301
@@ -14,100 +14,105 @@ text = u"""#include <windows.h>
 
 100 DIALOGEX 0, 0, 320, 240
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u521b\u5efa\u65b0\u89d2\u8272"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "创建角色"
+FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "\u89d2\u8272\u540d\u79f0\uff1a", -1, 20, 20, 80, 20
+    LTEXT           "角色名称：", -1, 20, 20, 80, 20
     EDITTEXT        IDC_EDIT_INPUT, 100, 18, 200, 24, ES_AUTOHSCROLL
-    LTEXT           "\u9009\u62e9\u804c\u4e1a\uff1a", -1, 20, 60, 200, 20
-    CONTROL         "\u6218\u58eb  (\u529b8 \u4f538 \u654f4 \u667a8)", IDC_RADIO_WAR, "Button",
+    LTEXT           "选择职业：", -1, 20, 60, 200, 20
+    CONTROL         "战士  (力8 体8 敏4 智8)", IDC_RADIO_WAR, "Button",
                     BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 20, 85, 280, 20
-    CONTROL         "\u6cd5\u5e08  (\u529b5 \u4f535 \u654f6 \u667a12)", IDC_RADIO_MAGE, "Button",
+    CONTROL         "法师  (力5 体5 敏6 智12)", IDC_RADIO_MAGE, "Button",
                     BS_AUTORADIOBUTTON, 20, 110, 280, 20
-    CONTROL         "\u5f13\u7bad\u624b(\u529b10 \u4f536 \u654f8 \u667a6)", IDC_RADIO_ARCH, "Button",
+    CONTROL         "射手  (力10 体6 敏8 智6)", IDC_RADIO_ARCH, "Button",
                     BS_AUTORADIOBUTTON, 20, 135, 280, 20
-    DEFPUSHBUTTON   "\u786e  \u5b9a", IDOK, 110, 190, 80, 30
-    PUSHBUTTON      "\u53d6  \u6d88", IDCANCEL, 210, 190, 80, 30
+    DEFPUSHBUTTON   "确  定", IDOK, 110, 190, 80, 30
+    PUSHBUTTON      "取  消", IDCANCEL, 210, 190, 80, 30
 END
 
 200 DIALOGEX 0, 0, 260, 140
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u83b7\u5f97\u7ecf\u9a8c\u503c"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "获得经验值"
+FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "\u8bf7\u8f93\u5165\u7ecf\u9a8c\u503c\uff1a", -1, 20, 30, 120, 20
+    LTEXT           "请输入经验值：", -1, 20, 30, 120, 20
     EDITTEXT        IDC_EDIT_INPUT, 140, 28, 100, 24, ES_AUTOHSCROLL | ES_NUMBER
-    DEFPUSHBUTTON   "\u786e  \u5b9a", IDOK, 70, 90, 80, 30
-    PUSHBUTTON      "\u53d6  \u6d88", IDCANCEL, 150, 90, 80, 30
+    DEFPUSHBUTTON   "确  定", IDOK, 70, 90, 80, 30
+    PUSHBUTTON      "取  消", IDCANCEL, 150, 90, 80, 30
 END
 
 400 DIALOGEX 0, 0, 400, 320
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u6280\u80fd\u7ba1\u7406"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "技能管理"
+FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "\u53ef\u7528\u6280\u80fd\uff1a", -1, 15, 10, 100, 20
+    LTEXT           "可用技能：", -1, 15, 10, 100, 20
     LISTBOX         IDC_LIST_SKILLS, 15, 32, 370, 180, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    LTEXT           "\u6280\u80fd\u70b9\u5269\u4f59\uff1a", -1, 15, 225, 100, 20
+    LTEXT           "技能点剩余：", -1, 15, 225, 100, 20
     LTEXT           "", IDC_TEXT_INFO, 115, 225, 100, 20
-    DEFPUSHBUTTON   "\u5b66\u4e60\u6280\u80fd", 10001, 20, 260, 120, 30
-    PUSHBUTTON      "\u5347\u7ea7\u6280\u80fd", 10002, 155, 260, 120, 30
-    PUSHBUTTON      "\u5173  \u95ed", IDCANCEL, 290, 260, 90, 30
+    DEFPUSHBUTTON   "学习技能", 10001, 20, 260, 120, 30
+    PUSHBUTTON      "升级技能", 10002, 155, 260, 120, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 290, 260, 90, 30
 END
 
 500 DIALOGEX 0, 0, 420, 340
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u80cc\u5305\u7ba1\u7406"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "背包管理"
+FONT 16, "微软雅黑"
 BEGIN
     LISTBOX         IDC_LIST_ITEMS, 15, 15, 390, 220, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    LTEXT           "\u9009\u62e9\u7269\u54c1\u540e\u53ef\u6267\u884c\uff1a", -1, 15, 245, 200, 20
-    DEFPUSHBUTTON   "\u4f7f\u7528\u7269\u54c1", 10001, 30, 280, 100, 30
-    PUSHBUTTON      "\u5220\u9664\u7269\u54c1", 10002, 150, 280, 100, 30
-    PUSHBUTTON      "\u5173  \u95ed", IDCANCEL, 290, 280, 100, 30
+    LTEXT           "选择物品后执行：", -1, 15, 245, 200, 20
+    DEFPUSHBUTTON   "使用物品", 10001, 30, 280, 100, 30
+    PUSHBUTTON      "删除物品", 10002, 150, 280, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 290, 280, 100, 30
 END
 
 600 DIALOGEX 0, 0, 440, 380
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u6821\u56ed\u5546\u5e97"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "校园商店"
+FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "\u5546\u5e97\u5546\u54c1\uff1a", -1, 15, 10, 100, 20
+    LTEXT           "商店商品：", -1, 15, 10, 100, 20
     LISTBOX         IDC_LIST_SHOP, 15, 30, 410, 130, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    PUSHBUTTON      "\u8d2d\u4e70\u9009\u4e2d", 10001, 15, 170, 100, 30
-    LTEXT           "\u91d1\u5e01\uff1a", -1, 130, 180, 40, 15
+    PUSHBUTTON      "购买选中", 10001, 15, 170, 100, 30
+    LTEXT           "金币：", -1, 130, 180, 40, 15
     LTEXT           "", IDC_TEXT_INFO, 170, 180, 100, 15
-    LTEXT           "\u6211\u7684\u80cc\u5305\uff1a", -1, 15, 215, 100, 20
+    LTEXT           "我的背包：", -1, 15, 215, 100, 20
     LISTBOX         IDC_LIST_ITEMS, 15, 235, 410, 90, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    PUSHBUTTON      "\u51fa\u552e\u9009\u4e2d", 10002, 15, 330, 100, 30
-    PUSHBUTTON      "\u5173  \u95ed", IDCANCEL, 330, 330, 90, 30
+    PUSHBUTTON      "出售选中", 10002, 15, 330, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 330, 330, 90, 30
 END
 
 700 DIALOGEX 0, 0, 460, 340
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u4efb\u52a1\u7cfb\u7edf"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "任务系统"
+FONT 16, "微软雅黑"
 BEGIN
     LISTBOX         IDC_LIST_TASKS, 15, 15, 430, 200, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    DEFPUSHBUTTON   "\u63a5\u53d7\u4efb\u52a1", 10001, 30, 240, 110, 30
-    PUSHBUTTON      "\u5b8c\u6210\u4efb\u52a1", 10002, 160, 240, 110, 30
-    PUSHBUTTON      "\u9886\u53d6\u5956\u52b1", 10003, 290, 240, 110, 30
+    DEFPUSHBUTTON   "接受任务", 10001, 30, 240, 110, 30
+    PUSHBUTTON      "完成任务", 10002, 160, 240, 110, 30
+    PUSHBUTTON      "领取奖励", 10003, 290, 240, 110, 30
     LTEXT           "", IDC_TEXT_INFO, 15, 285, 430, 20
-    PUSHBUTTON      "\u5173  \u95ed", IDCANCEL, 180, 305, 90, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 180, 305, 90, 30
 END
 
-800 DIALOGEX 0, 0, 400, 300
+800 DIALOGEX 0, 0, 440, 460
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "\u6218\u6597\u7cfb\u7edf"
-FONT 16, "\u5fae\u8f6f\u96c5\u9ed1"
+CAPTION "战斗系统"
+FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "\u9009\u62e9\u654c\u4eba\uff1a", -1, 15, 10, 100, 20
-    LISTBOX         IDC_LIST_ITEMS, 15, 30, 370, 120, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    DEFPUSHBUTTON   "\u53d1\u8d77\u6218\u6597", 10001, 100, 170, 100, 30
-    PUSHBUTTON      "\u5173  \u95ed", IDCANCEL, 220, 170, 100, 30
-    LTEXT           "", IDC_TEXT_INFO, 15, 215, 370, 60
+    LTEXT           "选择敌人：", -1, 15, 8, 100, 18
+    LISTBOX         IDC_LIST_ITEMS, 15, 28, 410, 100, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    LTEXT           "选择技能：", -1, 15, 138, 100, 18
+    LISTBOX         IDC_LIST_SKILLS, 15, 158, 410, 100, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    DEFPUSHBUTTON   "使用技能攻击", 10001, 30, 278, 120, 30
+    PUSHBUTTON      "基础攻击", 10002, 165, 278, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 310, 278, 100, 30
+    LTEXT           "", IDC_TEXT_INFO, 15, 320, 410, 125
 END
 """
-with open('gui_app/resources.rc', 'w', encoding='gbk') as f:
-    f.write(text)
-print('OK')
+
+path = r"C:\Users\张佳怡\OneDrive\Desktop\c++\-\gui_app\resources.rc"
+with open(path, 'w', encoding='gbk') as f:
+    f.write(content)
+print(f"Written {len(content.encode('gbk'))} bytes in GBK encoding")

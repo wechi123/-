@@ -13,7 +13,7 @@
 
 100 DIALOGEX 0, 0, 320, 240
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
-CAPTION "创建新角色"
+CAPTION "创建角色"
 FONT 16, "微软雅黑"
 BEGIN
     LTEXT           "角色名称：", -1, 20, 20, 80, 20
@@ -23,7 +23,7 @@ BEGIN
                     BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 20, 85, 280, 20
     CONTROL         "法师  (力5 体5 敏6 智12)", IDC_RADIO_MAGE, "Button",
                     BS_AUTORADIOBUTTON, 20, 110, 280, 20
-    CONTROL         "弓箭手(力10 体6 敏8 智6)", IDC_RADIO_ARCH, "Button",
+    CONTROL         "射手  (力10 体6 敏8 智6)", IDC_RADIO_ARCH, "Button",
                     BS_AUTORADIOBUTTON, 20, 135, 280, 20
     DEFPUSHBUTTON   "确  定", IDOK, 110, 190, 80, 30
     PUSHBUTTON      "取  消", IDCANCEL, 210, 190, 80, 30
@@ -60,7 +60,7 @@ CAPTION "背包管理"
 FONT 16, "微软雅黑"
 BEGIN
     LISTBOX         IDC_LIST_ITEMS, 15, 15, 390, 220, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    LTEXT           "选择物品后可执行：", -1, 15, 245, 200, 20
+    LTEXT           "选择物品后执行：", -1, 15, 245, 200, 20
     DEFPUSHBUTTON   "使用物品", 10001, 30, 280, 100, 30
     PUSHBUTTON      "删除物品", 10002, 150, 280, 100, 30
     PUSHBUTTON      "关  闭", IDCANCEL, 290, 280, 100, 30
@@ -95,14 +95,17 @@ BEGIN
     PUSHBUTTON      "关  闭", IDCANCEL, 180, 305, 90, 30
 END
 
-800 DIALOGEX 0, 0, 400, 300
+800 DIALOGEX 0, 0, 440, 460
 STYLE DS_CENTER | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU | WS_VISIBLE
 CAPTION "战斗系统"
 FONT 16, "微软雅黑"
 BEGIN
-    LTEXT           "选择敌人：", -1, 15, 10, 100, 20
-    LISTBOX         IDC_LIST_ITEMS, 15, 30, 370, 120, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
-    DEFPUSHBUTTON   "发起战斗", 10001, 100, 170, 100, 30
-    PUSHBUTTON      "关  闭", IDCANCEL, 220, 170, 100, 30
-    LTEXT           "", IDC_TEXT_INFO, 15, 215, 370, 60
+    LTEXT           "选择敌人：", -1, 15, 8, 100, 18
+    LISTBOX         IDC_LIST_ITEMS, 15, 28, 410, 100, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    LTEXT           "选择技能：", -1, 15, 138, 100, 18
+    LISTBOX         IDC_LIST_SKILLS, 15, 158, 410, 100, LBS_NOTIFY | WS_VSCROLL | WS_BORDER | LBS_HASSTRINGS
+    DEFPUSHBUTTON   "使用技能攻击", 10001, 30, 278, 120, 30
+    PUSHBUTTON      "基础攻击", 10002, 165, 278, 100, 30
+    PUSHBUTTON      "关  闭", IDCANCEL, 310, 278, 100, 30
+    LTEXT           "", IDC_TEXT_INFO, 15, 320, 410, 125
 END

@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // 校园RPG GUI — 完整版
 // 9大设定：角色/背包/商店/任务/战斗/成长/存档/SQLite/多线程
 // ============================================================
@@ -267,8 +267,8 @@ INT_PTR CALLBACK DlgBag(HWND h, UINT m, WPARAM w, LPARAM) {
         const auto& items = g_inventory.getItems();
 for (size_t i = 0; i < items.size(); ++i) {
             Item* it = items[i];
-            std::wstring text = L"[" + U2W(it->getTypeName()) + L"] " + U2W(it->getName())
-                + L"  x" + I2W(it->getQuantity()) + L"  " + U2W(it->getEffectDesc());
+            std::wstring text = L"[" + it->getTypeName() + L"] " + it->getName()
+                + L"  x" + I2W(it->getQuantity()) + L"  " + it->getEffectDesc();
             SendMessageW(hList, LB_ADDSTRING, 0, (LPARAM)text.c_str());
         }
         if (items.empty()) SendMessageW(hList, LB_ADDSTRING, 0, (LPARAM)L"（背包是空的）");
@@ -313,14 +313,14 @@ INT_PTR CALLBACK DlgShop(HWND h, UINT m, WPARAM w, LPARAM) {
         hGold = GetDlgItem(h, IDC_TEXT_INFO); SyncGold();
         for (int i = 0; i < g_shop.getItemCount(); ++i) {
             Item* it = g_shop.getItem(i);
-            std::wstring t = L"[" + U2W(it->getTypeName()) + L"] " + U2W(it->getName())
-                + L"  " + I2W(it->getPrice()) + L"G  " + U2W(it->getEffectDesc());
+            std::wstring t = L"[" + it->getTypeName() + L"] " + it->getName()
+                + L"  " + I2W(it->getPrice()) + L"G  " + it->getEffectDesc();
             SendMessageW(hShop, LB_ADDSTRING, 0, (LPARAM)t.c_str());
         }
         const auto& items = g_inventory.getItems();
 for (size_t i = 0; i < items.size(); ++i) {
             Item* it = items[i];
-            std::wstring t = L"[" + U2W(it->getTypeName()) + L"] " + U2W(it->getName())
+            std::wstring t = L"[" + it->getTypeName() + L"] " + it->getName()
                 + L"  x" + I2W(it->getQuantity()) + L"  (售价:" + I2W(it->getPrice()/2) + L"G)";
             SendMessageW(hBag, LB_ADDSTRING, 0, (LPARAM)t.c_str());
         }
@@ -613,3 +613,6 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow) {
     stopAutoSave();
     return 0;
 }
+
+
+
